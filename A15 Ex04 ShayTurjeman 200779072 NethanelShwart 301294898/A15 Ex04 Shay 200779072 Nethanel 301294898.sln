@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex04.Menus.Test", "Ex04.Menus.Test\Ex04.Menus.Test.csproj", "{1D750766-1AE2-4372-A2FD-00BC14C4BB6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex04.Menus.Delegates", "Ex04.Menus.Delegates\Ex04.Menus.Delegates.csproj", "{BD5D6DFD-1A05-4489-90DD-FFF0B88DD16B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex04.Menus. Interfaces", "Ex04.Menus. Interfaces\Ex04.Menus. Interfaces.csproj", "{7CEEE57A-DEF2-4F38-AF7B-399D55C6C12A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D8250C7C-B08B-4F86-A9A0-DCD9A618247E}"
+	ProjectSection(SolutionItems) = preProject
+		Exercise Checking Report.txt = Exercise Checking Report.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D750766-1AE2-4372-A2FD-00BC14C4BB6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D750766-1AE2-4372-A2FD-00BC14C4BB6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D750766-1AE2-4372-A2FD-00BC14C4BB6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D750766-1AE2-4372-A2FD-00BC14C4BB6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD5D6DFD-1A05-4489-90DD-FFF0B88DD16B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD5D6DFD-1A05-4489-90DD-FFF0B88DD16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD5D6DFD-1A05-4489-90DD-FFF0B88DD16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD5D6DFD-1A05-4489-90DD-FFF0B88DD16B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CEEE57A-DEF2-4F38-AF7B-399D55C6C12A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CEEE57A-DEF2-4F38-AF7B-399D55C6C12A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CEEE57A-DEF2-4F38-AF7B-399D55C6C12A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CEEE57A-DEF2-4F38-AF7B-399D55C6C12A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
