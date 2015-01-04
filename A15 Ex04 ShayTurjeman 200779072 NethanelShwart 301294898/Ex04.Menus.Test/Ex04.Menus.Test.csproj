@@ -34,6 +34,7 @@
   <ItemGroup>
     <Compile Include="DelegatesTest\TestMainMenuWithDelegates.cs" />
     <Compile Include="Helpers.cs" />
+    <Compile Include="IMainMenuApplication.cs" />
     <Compile Include="InterfacesTest\TestMainMenuWithInterfaces.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

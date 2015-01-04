@@ -15,10 +15,4 @@ namespace Ex04.Menus.Test
             IMainMenuApplication testMainMenuWithDelegates = new TestMainMenuWithDelegates();
         }
     }
-
-    public interface IMainMenuApplication
-    {
-        string MainMenuApplicationType { get; }
-        void Show();
-    }
 }

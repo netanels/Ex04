@@ -4,14 +4,11 @@ using System.Text;
 
 namespace Ex04.Menus.Delegates
 {
-    public delegate void BackMenuItemSelectedHandler();
-    public delegate void MenuItemSelectedHandler();
-    public delegate void SubMenuItemSelectedHandler(string i_SelectedMenuItemName, List<MenuItem> i_MenuItems);
     public class MenuItem
     {
-        internal event BackMenuItemSelectedHandler BackSelected;
-        internal event SubMenuItemSelectedHandler SubItemSelected;
-        public event MenuItemSelectedHandler Selected;
+        internal event Delegates.BackMenuItemSelectedHandler BackSelected;
+        internal event Delegates.SubMenuItemSelectedHandler SubItemSelected;
+        public event Delegates.MenuItemSelectedHandler Selected;
 
 
         private readonly string r_Name;
@@ -31,7 +28,7 @@ namespace Ex04.Menus.Delegates
             if (!HasSubItems)
             {
                 m_SubItems = new List<MenuItem>();
-                MenuItem newSubMenuItem = new MenuItem(MenuLogic.k_Back);
+                MenuItem newSubMenuItem = new MenuItem(MenuLogic.eSpecialValues.Back.ToString());
                 m_SubItems.Add(newSubMenuItem);
                 newSubMenuItem.BackSelected += newSubMenuItem_BackSelected;
             }

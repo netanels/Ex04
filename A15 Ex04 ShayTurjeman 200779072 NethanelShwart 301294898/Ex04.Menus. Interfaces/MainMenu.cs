@@ -30,7 +30,7 @@ namespace Ex04.Menus.Interfaces
         {
             r_MenuItems = new List<IMenuItem>();
             r_MenuActivation = i_MenuActivation;
-            r_MenuItems.Add(new MenuItem(MenuLogic.k_Exit, r_MenuActivation, this));
+            r_MenuItems.Add(new MenuItem(MenuLogic.eSpecialValues.Exit.ToString(), r_MenuActivation, this));
         }
 
         public void Show()

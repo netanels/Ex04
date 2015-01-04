@@ -6,8 +6,6 @@ namespace Ex04.Menus.Delegates
 {
     internal static class MenuLogic
     {
-        internal const string k_Exit = "Exit";
-        internal const string k_Back = "Back";
 
         internal static void menuItem_SubItemSelected(string i_SelectedMenuItemName, List<MenuItem> i_MenuItems)
         {
@@ -16,9 +14,9 @@ namespace Ex04.Menus.Delegates
 
             MenuItem selectedMenuItem = i_MenuItems[userInput];
 
-            if (selectedMenuItem.Name != k_Exit)
+            if (selectedMenuItem.Name != eSpecialValues.Exit.ToString())
             {
-                if (selectedMenuItem.Name == k_Back)
+                if (selectedMenuItem.Name == eSpecialValues.Back.ToString())
                 {
                     selectedMenuItem.OnBackSelected();
                 }
@@ -59,6 +57,12 @@ namespace Ex04.Menus.Delegates
             } while (!inputIsValid);
 
             return userInput;
+        }
+
+        internal enum eSpecialValues
+        {
+            Exit,
+            Back
         }
     }
 }

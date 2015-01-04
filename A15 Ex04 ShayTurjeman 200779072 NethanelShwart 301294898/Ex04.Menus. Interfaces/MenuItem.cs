@@ -39,16 +39,23 @@ namespace Ex04.Menus.Interfaces
             if (!HasSubItems)
             {
                 m_SubItems = new List<IMenuItem>();
-                m_SubItems.Add(new MenuItem(MenuLogic.k_Back, r_MenuActivation, r_FatherMenuItem));
+                m_SubItems.Add(new MenuItem(MenuLogic.eSpecialValues.Back.ToString(), r_MenuActivation, r_FatherMenuItem));
             }
             MenuItem newMenuItem = new MenuItem(i_MenuItemName, r_MenuActivation, this);
             m_SubItems.Add(newMenuItem);
             return newMenuItem;
         }
-        
+
         internal void ItemSelected()
         {
-            r_MenuActivation.MenuItemSelected(r_Name);
+            if (HasSubItems)
+            {
+                MenuLogic.SelectItemsLogic(this);
+            }
+            else
+            {
+                r_MenuActivation.MenuItemSelected(r_Name);
+            }
         }
 
         internal bool HasSubItems

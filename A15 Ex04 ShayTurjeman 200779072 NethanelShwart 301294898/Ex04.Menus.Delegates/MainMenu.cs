@@ -12,7 +12,7 @@ namespace Ex04.Menus.Delegates
         public MainMenu()
         {
             r_MenuItems = new List<MenuItem>();
-            r_MenuItems.Add(new MenuItem(MenuLogic.k_Exit));
+            r_MenuItems.Add(new MenuItem(MenuLogic.eSpecialValues.Exit.ToString()));
         }
 
         public void Show()

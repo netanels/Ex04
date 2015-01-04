@@ -6,33 +6,22 @@ namespace Ex04.Menus.Interfaces
 {
     internal static class MenuLogic
     {
-        internal const string k_Exit = "Exit";
-        internal const string k_Back = "Back";
-        
         internal static void SelectItemsLogic(IMenuItem i_MenuItem)
         {
             Console.Clear();
             int userInput = getUserInput(i_MenuItem);
-
             IMenuItem selectedMenuItem = i_MenuItem.SubItems[userInput];
 
-            if (selectedMenuItem.Name != k_Exit)
+            if (selectedMenuItem.Name != eSpecialValues.Exit.ToString())
             {
-                if (selectedMenuItem.Name == k_Back)
+                if (selectedMenuItem.Name == eSpecialValues.Back.ToString())
                 {
                     SelectItemsLogic(selectedMenuItem.FatherMenuItem);
                 }
                 else
                 {
-                    if ((selectedMenuItem as MenuItem).HasSubItems)
-                    {
-                        SelectItemsLogic(selectedMenuItem);
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        (selectedMenuItem as MenuItem).ItemSelected();
-                    }
+                    Console.Clear();
+                    (selectedMenuItem as MenuItem).ItemSelected();
                 }
             }
         }
@@ -66,6 +55,12 @@ namespace Ex04.Menus.Interfaces
             } while (!inputIsValid);
 
             return userInput;
+        }
+
+        internal enum eSpecialValues
+        {
+            Exit,
+            Back
         }
     }
 }
