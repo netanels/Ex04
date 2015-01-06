@@ -8,58 +8,82 @@ namespace Ex04.Menus.Test.DelegatesTest
     {
         private readonly DelegatesMainMenu r_MainMenu;
 
-        public string MainMenuApplicationType { get { return "delegates"; } }
+        public TestMainMenuWithDelegates()
+        {
+            r_MainMenu = new DelegatesMainMenu();
+
+            createWordCounterMenuItem();
+            createShowDateTimeMenuItem();
+            createShowVersionMenuItem();
+
+            Console.Clear();
+            Helpers.ShowMainMenu(this);
+        }
+
+        public string MainMenuApplicationType
+        {
+            get { return "delegates"; }
+        }
 
         public void Show()
         {
             r_MainMenu.Show();
         }
 
-        public TestMainMenuWithDelegates()
+        private void createWordCounterMenuItem()
         {
-            r_MainMenu = new DelegatesMainMenu();
-
             DelegatesMenuItem wordCounterMenuItem = r_MainMenu.AddItem(Helpers.k_WordCounter);
-            wordCounterMenuItem.Selected += wordCounterMenuItem_Selected;
 
+            wordCounterMenuItem.Selected += wordCounterMenuItem_Selected;
+        }
+
+        private void createShowDateTimeMenuItem()
+        {
             DelegatesMenuItem showDateTimeMenuItem = r_MainMenu.AddItem(Helpers.k_ShowDateTime);
 
-            DelegatesMenuItem showDateMenuItem = showDateTimeMenuItem.AddItem(Helpers.k_ShowDate);
+            createShowDateMenuItem(showDateTimeMenuItem);
+            createShowTimeMenuItem(showDateTimeMenuItem);
+        }
+
+        private void createShowDateMenuItem(DelegatesMenuItem i_ShowDateTimeMenuItem)
+        {
+            DelegatesMenuItem showDateMenuItem = i_ShowDateTimeMenuItem.AddItem(Helpers.k_ShowDate);
+
             showDateMenuItem.Selected += showDateMenuItem_Selected;
+        }
 
-            DelegatesMenuItem showTimeMenuItem = showDateTimeMenuItem.AddItem(Helpers.k_ShowTime);
+        private void createShowTimeMenuItem(DelegatesMenuItem i_ShowDateTimeMenuItem)
+        {
+            DelegatesMenuItem showTimeMenuItem = i_ShowDateTimeMenuItem.AddItem(Helpers.k_ShowTime);
+
             showTimeMenuItem.Selected += showTimeMenuItem_Selected;
+        }
 
+        private void createShowVersionMenuItem()
+        {
             DelegatesMenuItem showVersionMenuItem = r_MainMenu.AddItem(Helpers.k_ShowVersion);
-            showVersionMenuItem.Selected += showVersionMenuItem_Selected;
 
-            Console.Clear();
-            Helpers.ShowMainMenu(this);
+            showVersionMenuItem.Selected += showVersionMenuItem_Selected;
         }
 
         private void wordCounterMenuItem_Selected()
         {
             Helpers.WordCounter();
-            Helpers.ShowMainMenu(this);
         }
 
         private void showDateMenuItem_Selected()
         {
             Helpers.ShowDate();
-            Helpers.ShowMainMenu(this);
         }
 
         private void showTimeMenuItem_Selected()
         {
             Helpers.ShowTime();
-            Helpers.ShowMainMenu(this);
         }
 
         private void showVersionMenuItem_Selected()
         {
             Helpers.ShowVersion();
-            Helpers.ShowMainMenu(this);
         }
-
     }
 }

@@ -1,66 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ex04.Menus.Interfaces.Interfaces;
+﻿using System.Collections.Generic;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class MenuItem : IMenuItem
+    public class MenuItem
     {
         private readonly IMenuActivation r_MenuActivation;
-        private readonly IMenuItem r_FatherMenuItem;
         private readonly string r_Name;
-        private List<IMenuItem> m_SubItems;
+        private List<MenuItem> m_SubItems;
 
-        string IMenuItem.Name
+        internal MenuItem(string i_MenuItemName, IMenuActivation i_MenuActivation)
+        {
+            r_MenuActivation = i_MenuActivation;
+            r_Name = i_MenuItemName;
+        }
+
+        public string Name
         {
             get { return r_Name; }
         }
 
-        IMenuItem IMenuItem.FatherMenuItem
+        public bool HasSubItems
         {
-            get { return r_FatherMenuItem; }
-        }
-
-        List<IMenuItem> IMenuItem.SubItems
-        {
-            get { return m_SubItems; }
-        }
-
-        internal MenuItem(string i_MenuItemName, IMenuActivation i_MenuActivation, IMenuItem i_FatherMenuItem)
-        {
-            r_MenuActivation = i_MenuActivation;
-            r_FatherMenuItem = i_FatherMenuItem;
-            r_Name = i_MenuItemName;
+            get { return m_SubItems != null; }
         }
 
         public MenuItem AddItem(string i_MenuItemName)
         {
             if (!HasSubItems)
             {
-                m_SubItems = new List<IMenuItem>();
-                m_SubItems.Add(new MenuItem(MenuLogic.eSpecialValues.Back.ToString(), r_MenuActivation, r_FatherMenuItem));
+                m_SubItems = new List<MenuItem>();
+
+                m_SubItems.Add(new MenuItem(MenuLogic.eSpecialMenuItemsValues.Back.ToString(), r_MenuActivation));
             }
-            MenuItem newMenuItem = new MenuItem(i_MenuItemName, r_MenuActivation, this);
+            MenuItem newMenuItem = new MenuItem(i_MenuItemName, r_MenuActivation);
             m_SubItems.Add(newMenuItem);
             return newMenuItem;
         }
 
-        internal void ItemSelected()
+        internal void ItemSelectedLogic()
         {
             if (HasSubItems)
             {
-                MenuLogic.SelectItemsLogic(this);
+                MenuLogic.SubItemsSelectedLogic(Name, m_SubItems);
             }
             else
             {
                 r_MenuActivation.MenuItemSelected(r_Name);
             }
-        }
-
-        internal bool HasSubItems
-        {
-            get { return m_SubItems != null; }
         }
     }
 }

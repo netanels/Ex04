@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Ex04.Menus.Delegates
 {
+    public delegate void MenuItemSelectedHandler();
+
     public class MenuItem
     {
-        internal event Delegates.BackMenuItemSelectedHandler BackSelected;
-        internal event Delegates.SubMenuItemSelectedHandler SubItemSelected;
-        public event Delegates.MenuItemSelectedHandler Selected;
-
-
+        public event MenuItemSelectedHandler Selected;
         private readonly string r_Name;
         private List<MenuItem> m_SubItems;
 
@@ -19,68 +15,47 @@ namespace Ex04.Menus.Delegates
             r_Name = i_MenuItemName;
         }
 
+        public string Name
+        {
+            get { return r_Name; }
+        }
+
+        public bool HasSubItems
+        {
+            get { return m_SubItems != null; }
+        }
+        
         public MenuItem AddItem(string i_MenuItemName)
         {
             MenuItem newMenuItem = new MenuItem(i_MenuItemName);
-
-            newMenuItem.SubItemSelected += MenuLogic.menuItem_SubItemSelected;
-            newMenuItem.BackSelected += newMenuItem_BackSelected;
             if (!HasSubItems)
             {
                 m_SubItems = new List<MenuItem>();
-                MenuItem newSubMenuItem = new MenuItem(MenuLogic.eSpecialValues.Back.ToString());
+                MenuItem newSubMenuItem = new MenuItem(MenuLogic.eSpecialMenuItemsValues.Back.ToString());
+
                 m_SubItems.Add(newSubMenuItem);
-                newSubMenuItem.BackSelected += newSubMenuItem_BackSelected;
             }
             m_SubItems.Add(newMenuItem);
             return newMenuItem;
         }
 
-        void newMenuItem_BackSelected()
-        {
-            MenuLogic.menuItem_SubItemSelected(Name, SubItems);
-        }
-
-        private void newSubMenuItem_BackSelected()
-        {
-            if (BackSelected != null)
-            {
-                BackSelected.Invoke();
-            }
-        }
-
-        internal string Name { get { return r_Name; } }
-
-        internal List<MenuItem> SubItems { get { return m_SubItems; } }
-
-        internal bool HasSubItems
-        {
-            get { return m_SubItems != null; }
-        }
-
-        internal void OnSelected()
+        internal void ItemSelectedLogic()
         {
             if (HasSubItems)
             {
-                if (SubItemSelected != null)
-                {
-                    SubItemSelected.Invoke(Name, SubItems);
-                }
+                MenuLogic.SubItemsSelectedLogic(Name, m_SubItems);
             }
             else
             {
-                if (Selected != null)
-                {
-                    Selected.Invoke();
-                }
+                OnSelected();
             }
         }
 
-        internal void OnBackSelected()
+        protected virtual void OnSelected()
         {
-            if (BackSelected != null)
+            if (Selected != null)
             {
-                BackSelected.Invoke();
+                Selected.Invoke();
             }
         }
     }

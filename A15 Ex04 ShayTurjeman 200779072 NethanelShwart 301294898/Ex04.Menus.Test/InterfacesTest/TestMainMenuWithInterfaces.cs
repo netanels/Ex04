@@ -1,47 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ex04.Menus.Interfaces;
 using InterfacesMainMenu = Ex04.Menus.Interfaces.MainMenu;
 using InterfacesMenuItem = Ex04.Menus.Interfaces.MenuItem;
-using Ex04.Menus.Interfaces.Interfaces;
 
 namespace Ex04.Menus.Test.InterfacesTest
 {
     public class TestMainMenuWithInterfaces : IMenuActivation, IMainMenuApplication
     {
-        private readonly InterfacesMainMenu r_MainMenu;
-
         private readonly Dictionary<string, eApplicationAction> r_ApplicationActionsDictionary =
             new Dictionary<string, eApplicationAction>();
 
-
-        public string MainMenuApplicationType { get { return "interfaces"; } }
-
-        public void Show()
-        {
-            r_MainMenu.Show();
-        }
+        private readonly InterfacesMainMenu r_MainMenu;
 
         public TestMainMenuWithInterfaces()
         {
             r_MainMenu = new InterfacesMainMenu(this);
 
-            InterfacesMenuItem wordCounterMenuItem = r_MainMenu.AddItem(Helpers.k_WordCounter);
-            r_ApplicationActionsDictionary.Add(Helpers.k_WordCounter, eApplicationAction.WordCounter);
-
-            InterfacesMenuItem showDateTimeMenuItem = r_MainMenu.AddItem(Helpers.k_ShowDateTime);
-
-            InterfacesMenuItem showDateMenuItem = showDateTimeMenuItem.AddItem(Helpers.k_ShowDate);
-            r_ApplicationActionsDictionary.Add(Helpers.k_ShowDate, eApplicationAction.ShowDate);
-
-
-            InterfacesMenuItem showTimeMenuItem = showDateTimeMenuItem.AddItem(Helpers.k_ShowTime);
-            r_ApplicationActionsDictionary.Add(Helpers.k_ShowTime, eApplicationAction.ShowTime);
-
-            InterfacesMenuItem showVersionMenuItem = r_MainMenu.AddItem(Helpers.k_ShowVersion);
-            r_ApplicationActionsDictionary.Add(Helpers.k_ShowVersion, eApplicationAction.ShowVersion);
+            createWordCounterMenuItem();
+            createShowDateTimeMenuItem();
+            createShowVersionMenuItem();
 
             Console.Clear();
             Helpers.ShowMainMenu(this);
+        }
+
+        public string MainMenuApplicationType
+        {
+            get { return "interfaces"; }
+        }
+
+        public void Show()
+        {
+            r_MainMenu.Show();
         }
 
         void IMenuActivation.MenuItemSelected(string i_SelectedItem)
@@ -63,8 +54,42 @@ namespace Ex04.Menus.Test.InterfacesTest
                     Helpers.ShowVersion();
                     break;
             }
+        }
 
-            Helpers.ShowMainMenu(this);
+        private void createWordCounterMenuItem()
+        {
+            InterfacesMenuItem wordCounterMenuItem = r_MainMenu.AddItem(Helpers.k_WordCounter);
+
+            r_ApplicationActionsDictionary.Add(Helpers.k_WordCounter, eApplicationAction.WordCounter);
+        }
+
+        private void createShowDateTimeMenuItem()
+        {
+            InterfacesMenuItem showDateTimeMenuItem = r_MainMenu.AddItem(Helpers.k_ShowDateTime);
+
+            createShowDateMenuItem(showDateTimeMenuItem);
+            createShowTimeMenuItem(showDateTimeMenuItem);
+        }
+
+        private void createShowDateMenuItem(InterfacesMenuItem i_ShowDateTimeMenuItem)
+        {
+            InterfacesMenuItem showDateMenuItem = i_ShowDateTimeMenuItem.AddItem(Helpers.k_ShowDate);
+
+            r_ApplicationActionsDictionary.Add(Helpers.k_ShowDate, eApplicationAction.ShowDate);
+        }
+
+        private void createShowTimeMenuItem(InterfacesMenuItem i_ShowDateTimeMenuItem)
+        {
+            InterfacesMenuItem showTimeMenuItem = i_ShowDateTimeMenuItem.AddItem(Helpers.k_ShowTime);
+
+            r_ApplicationActionsDictionary.Add(Helpers.k_ShowTime, eApplicationAction.ShowTime);
+        }
+
+        private void createShowVersionMenuItem()
+        {
+            InterfacesMenuItem showVersionMenuItem = r_MainMenu.AddItem(Helpers.k_ShowVersion);
+
+            r_ApplicationActionsDictionary.Add(Helpers.k_ShowVersion, eApplicationAction.ShowVersion);
         }
 
         private enum eApplicationAction
@@ -74,6 +99,5 @@ namespace Ex04.Menus.Test.InterfacesTest
             ShowTime,
             ShowVersion
         }
-
     }
 }

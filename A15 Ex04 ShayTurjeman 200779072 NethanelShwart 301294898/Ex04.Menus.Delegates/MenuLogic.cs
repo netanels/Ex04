@@ -6,26 +6,23 @@ namespace Ex04.Menus.Delegates
 {
     internal static class MenuLogic
     {
-
-        internal static void menuItem_SubItemSelected(string i_SelectedMenuItemName, List<MenuItem> i_MenuItems)
+        internal static void SubItemsSelectedLogic(string i_SelectedMenuItemName, List<MenuItem> i_MenuItems)
         {
-            Console.Clear();
-            int userInput = getUserInput(i_SelectedMenuItemName, i_MenuItems);
+            bool continueLoopFlag;
 
-            MenuItem selectedMenuItem = i_MenuItems[userInput];
-
-            if (selectedMenuItem.Name != eSpecialValues.Exit.ToString())
+            do
             {
-                if (selectedMenuItem.Name == eSpecialValues.Back.ToString())
+                Console.Clear();
+                int userInput = getUserInput(i_SelectedMenuItemName, i_MenuItems);
+                MenuItem selectedMenuItem = i_MenuItems[userInput];
+
+                continueLoopFlag = selectedMenuItem.Name != eSpecialMenuItemsValues.Exit.ToString()
+                                   && selectedMenuItem.Name != eSpecialMenuItemsValues.Back.ToString();
+                if (continueLoopFlag)
                 {
-                    selectedMenuItem.OnBackSelected();
+                    selectedMenuItem.ItemSelectedLogic();
                 }
-                else
-                {
-                    Console.Clear();
-                    selectedMenuItem.OnSelected();
-                }
-            }
+            } while (continueLoopFlag);
         }
 
         private static int getUserInput(string i_Header, List<MenuItem> i_MenuItems)
@@ -59,7 +56,7 @@ namespace Ex04.Menus.Delegates
             return userInput;
         }
 
-        internal enum eSpecialValues
+        internal enum eSpecialMenuItemsValues
         {
             Exit,
             Back

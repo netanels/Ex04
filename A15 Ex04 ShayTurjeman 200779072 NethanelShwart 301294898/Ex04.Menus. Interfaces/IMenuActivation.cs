@@ -1,4 +1,4 @@
-﻿namespace Ex04.Menus.Interfaces.Interfaces
+﻿namespace Ex04.Menus.Interfaces
 {
     public interface IMenuActivation
     {

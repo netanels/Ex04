@@ -1,39 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
-using Ex04.Menus.Interfaces.Interfaces;
 
 namespace Ex04.Menus.Interfaces
 {
     internal static class MenuLogic
     {
-        internal static void SelectItemsLogic(IMenuItem i_MenuItem)
+        internal static void SubItemsSelectedLogic(string i_SelectedMenuItemName, List<MenuItem> i_MenuItems)
         {
-            Console.Clear();
-            int userInput = getUserInput(i_MenuItem);
-            IMenuItem selectedMenuItem = i_MenuItem.SubItems[userInput];
+            bool continueLoopFlag;
 
-            if (selectedMenuItem.Name != eSpecialValues.Exit.ToString())
+            do
             {
-                if (selectedMenuItem.Name == eSpecialValues.Back.ToString())
+                Console.Clear();
+                int userInput = getUserInput(i_SelectedMenuItemName, i_MenuItems);
+                MenuItem selectedMenuItem = i_MenuItems[userInput];
+
+                continueLoopFlag = selectedMenuItem.Name != eSpecialMenuItemsValues.Exit.ToString()
+                                   && selectedMenuItem.Name != eSpecialMenuItemsValues.Back.ToString();
+                if (continueLoopFlag)
                 {
-                    SelectItemsLogic(selectedMenuItem.FatherMenuItem);
+                    selectedMenuItem.ItemSelectedLogic();
                 }
-                else
-                {
-                    Console.Clear();
-                    (selectedMenuItem as MenuItem).ItemSelected();
-                }
-            }
+            } while (continueLoopFlag);
         }
 
-        private static int getUserInput(IMenuItem i_MenuItem)
+        private static int getUserInput(string i_Header, List<MenuItem> i_MenuItems)
         {
             int counter = 0, userInput;
             bool inputIsValid;
             StringBuilder stringBuilder = new StringBuilder();
 
-            stringBuilder.AppendLine(string.Format("{0}:{1}", i_MenuItem.Name, Environment.NewLine));
-            foreach (IMenuItem item in i_MenuItem.SubItems)
+            stringBuilder.AppendLine(string.Format("{0}:{1}", i_Header, Environment.NewLine));
+            foreach (MenuItem item in i_MenuItems)
             {
                 stringBuilder.AppendLine(string.Format("{0}. {1}", counter, item.Name));
                 counter++;
@@ -49,7 +48,7 @@ namespace Ex04.Menus.Interfaces
                 if (!inputIsValid)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("{0}Input is invalid{0}", Environment.NewLine);
+                    Console.WriteLine("{0}Input is invalid, please try again{0}", Environment.NewLine);
                     Console.ResetColor();
                 }
             } while (!inputIsValid);
@@ -57,7 +56,7 @@ namespace Ex04.Menus.Interfaces
             return userInput;
         }
 
-        internal enum eSpecialValues
+        internal enum eSpecialMenuItemsValues
         {
             Exit,
             Back

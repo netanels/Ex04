@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ex04.Menus.Test.DelegatesTest;
+﻿using Ex04.Menus.Test.DelegatesTest;
 using Ex04.Menus.Test.InterfacesTest;
 
 namespace Ex04.Menus.Test
