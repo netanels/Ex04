@@ -13,6 +13,7 @@ namespace Ex04.Menus.Test
 
         public static void ShowMainMenu(IMainMenuApplication i_MainMenuApplication)
         {
+            Console.Clear();
             Console.Write("This 'Main Menu' application is using ");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(i_MainMenuApplication.MainMenuApplicationType);

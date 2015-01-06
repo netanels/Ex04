@@ -4,7 +4,6 @@ namespace Ex04.Menus.Delegates
 {
     public class MainMenu
     {
-
         private const string k_MainManueName = "Main menu";
         private readonly List<MenuItem> r_MenuItems;
 

@@ -7,6 +7,7 @@ namespace Ex04.Menus.Delegates
     public class MenuItem
     {
         public event MenuItemSelectedHandler Selected;
+
         private readonly string r_Name;
         private List<MenuItem> m_SubItems;
 
@@ -24,7 +25,7 @@ namespace Ex04.Menus.Delegates
         {
             get { return m_SubItems != null; }
         }
-        
+
         public MenuItem AddItem(string i_MenuItemName)
         {
             MenuItem newMenuItem = new MenuItem(i_MenuItemName);

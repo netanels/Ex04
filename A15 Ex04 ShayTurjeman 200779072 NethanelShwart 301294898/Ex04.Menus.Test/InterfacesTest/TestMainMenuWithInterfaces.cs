@@ -16,12 +16,7 @@ namespace Ex04.Menus.Test.InterfacesTest
         public TestMainMenuWithInterfaces()
         {
             r_MainMenu = new InterfacesMainMenu(this);
-
-            createWordCounterMenuItem();
-            createShowDateTimeMenuItem();
-            createShowVersionMenuItem();
-
-            Console.Clear();
+            createMenu();
             Helpers.ShowMainMenu(this);
         }
 
@@ -54,6 +49,13 @@ namespace Ex04.Menus.Test.InterfacesTest
                     Helpers.ShowVersion();
                     break;
             }
+        }
+
+        private void createMenu()
+        {
+            createWordCounterMenuItem();
+            createShowDateTimeMenuItem();
+            createShowVersionMenuItem();
         }
 
         private void createWordCounterMenuItem()

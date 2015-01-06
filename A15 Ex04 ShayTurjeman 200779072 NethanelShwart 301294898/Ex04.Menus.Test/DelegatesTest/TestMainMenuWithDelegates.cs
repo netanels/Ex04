@@ -11,12 +11,7 @@ namespace Ex04.Menus.Test.DelegatesTest
         public TestMainMenuWithDelegates()
         {
             r_MainMenu = new DelegatesMainMenu();
-
-            createWordCounterMenuItem();
-            createShowDateTimeMenuItem();
-            createShowVersionMenuItem();
-
-            Console.Clear();
+            createMenu();
             Helpers.ShowMainMenu(this);
         }
 
@@ -28,6 +23,13 @@ namespace Ex04.Menus.Test.DelegatesTest
         public void Show()
         {
             r_MainMenu.Show();
+        }
+
+        private void createMenu()
+        {
+            createWordCounterMenuItem();
+            createShowDateTimeMenuItem();
+            createShowVersionMenuItem();
         }
 
         private void createWordCounterMenuItem()
